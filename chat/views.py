@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from chat.forms import MessageForm
 from django.views.decorators.csrf import csrf_exempt
+from chat.models import Message
 
 @csrf_exempt
 def message(request):
@@ -19,3 +20,11 @@ def message(request):
 			f.save()
 			
 	return render_to_response('chat/add_message.html',{"form":form})
+
+def view_messages(request, chat_id):
+	try:
+		messages = Message.objects.filter(chat__id=chat_id)
+	except Message.DoesNotExist:
+		raise
+	
+	return render_to_response('chat/see_chat.html',{"messages":messages})

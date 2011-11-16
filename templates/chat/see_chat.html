@@ -1,13 +1,26 @@
 <html>
 <head><title>Messages of Chat no. <!--{{ chat }}--></title></head>
-
+<style type="text/css">
+h1
+{
+font-family:Arial Black;
+color:blue;
+}
+</style>
 <body>
 
+<h1> 
+
+{{ messages.0.chat.title }}</br>
+{{ messages.0.chat.start_date }}</br>
+{{ messages.0.chat.ip }}
+
+
+</h1>
 <ul>
-{% for message in chat %}
-{% empty %}
-    <li>Sorry, no messages <!--{{chat}}--></li>
-<li>{{ item }}</li>
+{% for message in messages %}
+<li><text>{{ message.body }} <b>at</b> </text> {{message.date_sent|date:"G:i:s"}} <text> <b>from</b> </text> {{ message.ip }} <text> 
+</li><br/>
 {% endfor %}
 </ul>
 

@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def message(request):
-	form = MessageForm #<- it is a Form not a Model, it is a Form based on a Model, but still a Form object
+	form = MessageForm
 	if request.method == "POST":
 		form = MessageForm(request.POST)
 		if form.is_valid():
@@ -19,3 +19,5 @@ def message(request):
 			f.save()
 			
 	return render_to_response('chat/add_message.html',{"form":form})
+	
+def seemess(request)

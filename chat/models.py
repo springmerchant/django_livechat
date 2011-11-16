@@ -6,7 +6,7 @@ class Chat(models.Model):
 	title = models.CharField(max_length=128)
 	owner = models.CharField(max_length=30)
 	end_date = models.DateTimeField()
-	department = models.ForeignKey('Department')
+	department = models.ForeignKey('Department',null=True,blank=True)
 	def __unicode__(self):
 		return self.title
 
@@ -14,7 +14,7 @@ class Chat(models.Model):
 class Message(models.Model):
 	body = models.TextField()
 	date_sent = models.DateTimeField(auto_now=True)
-	date_edited = models.DateTimeField()
+	date_edited = models.DateTimeField(null=True,blank=True)
 	ip = models.IPAddressField()
 	chat = models.ForeignKey(Chat)
 	def __unicode__(self):

@@ -1,6 +1,6 @@
-from Chat.models import Chat
-from Chat.models import Message
-from Chat.models import Department
+from chat.models import Chat
+from chat.models import Message
+from chat.models import Department
 from django.contrib import admin
 
 

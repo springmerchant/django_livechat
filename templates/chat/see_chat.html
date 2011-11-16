@@ -1,0 +1,15 @@
+<html>
+<head><title>Messages of Chat no. <!--{{ chat }}--></title></head>
+
+<body>
+
+<ul>
+{% for message in chat %}
+{% empty %}
+    <li>Sorry, no messages <!--{{chat}}--></li>
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+
+</body>
+</html>

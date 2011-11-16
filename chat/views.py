@@ -19,5 +19,3 @@ def message(request):
 			f.save()
 			
 	return render_to_response('chat/add_message.html',{"form":form})
-	
-def seemess(request)

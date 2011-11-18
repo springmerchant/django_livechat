@@ -8,4 +8,3 @@ class MessageForm(forms.ModelForm):
 		model = Message
 		fields = ('body', 'ip', 'chat')
 		
-		

@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from chat.forms import MessageForm
 from django.views.decorators.csrf import csrf_exempt
 from chat.models import Message
+from django.shortcuts import redirect
 
 @csrf_exempt
 def message(request):
@@ -18,8 +19,11 @@ def message(request):
 		if form.is_valid():
 			f=form.save(commit=False)
 			f.save()
-			
-	return render_to_response('chat/add_message.html',{"form":form})
+			return redirect('/messages/%s/'% (f.chat.id))
+	return render_to_response('chat/add_message.html',{"form":form})	
+
+	
+	
 
 def view_messages(request, chat_id):
 	try:

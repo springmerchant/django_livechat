@@ -17,6 +17,7 @@ class Message(models.Model):
 	date_edited = models.DateTimeField(null=True,blank=True)
 	ip = models.IPAddressField()
 	chat = models.ForeignKey(Chat)
+	field = models.ForeignKey(User)
 	def __unicode__(self):
 		return self.chat.title
 

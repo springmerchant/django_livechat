@@ -102,12 +102,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'django_livechat.urls'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-	"D:/djangoprojects/django_livechat/templates"
-)
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',

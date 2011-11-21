@@ -1,6 +1,16 @@
-<form action="." method="post">{% csrf_token %}
-<ul>
-{{ form.as_ul }}
-</ul>
-<input type="submit" value="Submit"/>
+<html>                                                                  
+<head>                                                                  
+<script type="text/javascript" src="jquery.js">        
+</script>  
+<script type="text/javascript"> 
+</script>                                                               
+</head>                                                                 
+<body>                                                                  
+	<form action="." method="post">{% csrf_token %}
+		<ul>
+			{{ form.as_ul }}
+		</ul>
+	<input type="submit" value="Submit" onclick="alert('The message has been added!')"/>
 </form>
+</body>                                                                 
+</html>

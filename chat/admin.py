@@ -8,7 +8,7 @@ from django.contrib import admin
 admin.site.register(Chat)
 admin.site.register(Message)
 admin.site.register(Department)
-admin.site.register(Operator)
 admin.site.register(Visitor)
+admin.site.register(Operator)
 
 

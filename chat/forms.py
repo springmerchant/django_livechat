@@ -6,5 +6,4 @@ class MessageForm(forms.ModelForm):
 
 	class Meta:
 		model = Message
-		fields = ('body', 'ip', 'chat')
-		
+		fields = ('body', 'ip', 'chat', 'visitor', 'operator')

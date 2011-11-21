@@ -1,8 +1,7 @@
 from chat.models import Chat
 from chat.models import Message
 from chat.models import Department
-from chat.models import Visitor
-from chat.models import Operator
+from chat.models import Operator,Visitor
 from django.contrib import admin
 
 

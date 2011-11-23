@@ -1,10 +1,15 @@
 <html>
-<head><title>Messages of Chat no. <!--{{ chat }}--></title></head>
+<head><title>Messages</title></head>
 <style type="text/css">
 h1
 {
 font-family:Arial Black;
 color:blue;
+}
+.clsdiv
+{
+font-family:Arial Black;
+
 }
 </style>
 <body>
@@ -17,12 +22,19 @@ color:blue;
 
 
 </h1>
-<ul>
+<!--<ul>
 {% for message in messages %}
 <li><text>{{ message.body }} <b>at</b> </text> {{message.date_sent|date:"G:i:s"}} <text> <b>from</b> </text> {{ message.ip }} <text> 
 </li><br/>
 {% endfor %}
-</ul>
+</ul>-->
 
+
+{% for message in messages %}
+	{{ message.ip}} :--> {{ message.body }} 
+	</br>
+{% endfor %}
+
+</div>
 </body>
 </html>

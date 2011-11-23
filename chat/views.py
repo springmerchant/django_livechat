@@ -10,16 +10,29 @@ from chat.forms import MessageForm
 from django.views.decorators.csrf import csrf_exempt
 from chat.models import Message
 from django.shortcuts import redirect
+from django.utils import simplejson
 
 @csrf_exempt
 def message(request):
 	form = MessageForm
+	error = {}
+	
 	if request.method == "POST":
 		form = MessageForm(request.POST)
+	
 		if form.is_valid():
-			f=form.save(commit=False)
+		
+			f = form.save(commit=False)
+			f.ip = "1.2.3.4";
+			
 			f.save()
-			return redirect('/messages/%s/'% (f.chat.id))
+			
+			if request.is_ajax():
+				error['error'] = 'False'
+				return HttpResponse(simplejson.dumps(error))
+			else:
+				return redirect('/messages/%s/'% (f.chat.id))
+
 	return render_to_response('chat/add_message.html',{"form":form})	
 
 	

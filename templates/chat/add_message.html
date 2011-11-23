@@ -1,0 +1,77 @@
+<html>                                                                  
+<head>                                                                  
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>  
+<script type="text/javascript">
+
+	
+function get_messages()
+{
+	var chat_id = $("#id_chat").val();
+	$.get("http://127.0.0.1:8000/messages/"+chat_id+"/", function(result)
+	{
+		$("#message_list").html(result);
+	}
+)}
+function post_message()
+{
+	$.post("http://127.0.0.1:8000/add/",{ 'body' : $("#id_body").val(),'ip' : $("#id_ip").val(),'chat' : $("#id_chat").val(),'visitor' : $("#id_visitor").val(),'operator' : $("#id_operator").val()}, function(result){
+	if(result.error == "False" )
+	{
+		get_messages();
+	}
+
+}, "JSON")
+}
+
+$(document).ready(function() {
+	$("#submit_button").click(function() {	
+	post_message();
+	});
+});
+
+
+</script>
+<style type="text/css">
+#add_message_form
+{
+background-color:#d0e4fe;
+}
+#message_list
+{
+color:blue;
+}
+#submit_button
+{
+float: right;
+height: 52px;
+margin-right: 90px;
+margin-top: -68px;
+}
+.message_body
+{
+height:50;
+width:1000;
+}
+</style>                                                           
+</head>                                                                 
+<body>                                                                  
+	
+<div id="message_list">
+
+</div>
+
+<div id="add_message_form">
+<form action="." method="post">{% csrf_token %}
+		<ul>
+			{{ form.as_ul }}
+		</ul>
+	<input accesskey="U" id="submit_button" type="button" value="Send" name="submit"/>
+</form>
+</div>
+</body>                                                                 
+</html>
+<!--JSON - Javascript Object Notation
+
+var obj = {'name':'Flavius','email':'flava@flavius.com'}-->
+
+

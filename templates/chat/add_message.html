@@ -3,10 +3,11 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>  
 <script type="text/javascript">
 
+
 	
 function get_messages()
 {
-	var chat_id = $("#id_chat").val();
+	var chat_id = "{{ chat.id }}";
 	$.get("http://127.0.0.1:8000/messages/"+chat_id+"/", function(result)
 	{
 		$("#message_list").html(result);
@@ -14,7 +15,9 @@ function get_messages()
 )}
 function post_message()
 {
-	$.post("http://127.0.0.1:8000/add/",{ 'body' : $("#id_body").val(),'ip' : $("#id_ip").val(),'chat' : $("#id_chat").val(),'visitor' : $("#id_visitor").val(),'operator' : $("#id_operator").val()}, function(result){
+	
+	var chat_id = "{{ chat.id }}";
+	$.post("http://127.0.0.1:8000/add/"+chat_id+"/",{ 'body' : $("#id_body").val(),'ip' : $("#id_ip").val(),'chat' : $("#id_chat").val()}, function(result){
 	if(result.error == "False" )
 	{
 		get_messages();
@@ -26,7 +29,11 @@ function post_message()
 $(document).ready(function() {
 	$("#submit_button").click(function() {	
 	post_message();
+	
 	});
+	{% if chat.status == "a" %}
+	get_messages();
+	{% endif %}
 });
 
 
@@ -64,6 +71,7 @@ width:1000;
 <form action="." method="post">{% csrf_token %}
 		<ul>
 			{{ form.as_ul }}
+			
 		</ul>
 	<input accesskey="U" id="submit_button" type="button" value="Send" name="submit"/>
 </form>

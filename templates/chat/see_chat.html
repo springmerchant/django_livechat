@@ -6,10 +6,13 @@ h1
 font-family:Arial Black;
 color:blue;
 }
+h2
+{
+color:black;
+}
 .clsdiv
 {
 font-family:Arial Black;
-
 }
 </style>
 <body>
@@ -31,7 +34,7 @@ font-family:Arial Black;
 
 
 {% for message in messages %}
-	{{ message.ip}} :--> {{ message.body }} 
+	{{ message.date_sent|date:"G:i:s"}} :-->    {{ message.body }}
 	</br>
 {% endfor %}
 

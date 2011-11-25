@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
 	url(r'^admin/', include(admin.site.urls)),
-	url(r'^add/$', 'chat.views.message'),
+	url(r'^add/(?P<chat_id>\d{0,2})/$', 'chat.views.message'),
 	url(r'^messages/(?P<chat_id>\d{0,2})/$', 'chat.views.view_messages')
 )
 

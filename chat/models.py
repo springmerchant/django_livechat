@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 
 
 CHAT_STATUS = (
-        ('1', 'Closed'),
-        ('2', 'Timed Out'),
-		('3', 'Unanswered'),
-		('4', 'Active')
+        (1, 'Closed'),
+        (2, 'Timed Out'),
+		(3, 'Unanswered'),
+		(4, 'Active')
     )
 class Chat(models.Model):
 	start_date = models.DateTimeField(auto_now_add=True)

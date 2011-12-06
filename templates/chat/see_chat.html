@@ -25,13 +25,6 @@ font-family:Arial Black;
 
 
 </h1>
-<!--<ul>
-{% for message in messages %}
-<li><text>{{ message.body }} <b>at</b> </text> {{message.date_sent|date:"G:i:s"}} <text> <b>from</b> </text> {{ message.ip }} <text> 
-</li><br/>
-{% endfor %}
-</ul>-->
-
 
 {% for message in messages %}
 	{{ message.date_sent|date:"G:i:s"}} :-->    {{ message.body }}

@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 
 
 CHAT_STATUS = (
-        ('c', 'Closed'),
-        ('t', 'Timed Out'),
-		('u', 'Unanswered'),
-		('a', 'Active')
+        ('1', 'Closed'),
+        ('2', 'Timed Out'),
+		('3', 'Unanswered'),
+		('4', 'Active')
     )
 class Chat(models.Model):
 	start_date = models.DateTimeField(auto_now_add=True)
@@ -15,7 +15,7 @@ class Chat(models.Model):
 	end_date = models.DateTimeField(null=True,blank=True)
 	department = models.ForeignKey('Department',null=True,blank=True)
 	visitor = models.ForeignKey('Visitor',null=True,blank=True)
-	status = models.CharField(max_length=2, choices=CHAT_STATUS)
+	status = models.PositiveSmallIntegerField(max_length=2, choices=CHAT_STATUS)
 	
 	def __unicode__(self):
 		return self.title

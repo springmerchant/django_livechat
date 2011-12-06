@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from chat.models import Message,Chat
 from django.shortcuts import redirect
 from django.utils import simplejson
+import time
 
 @csrf_exempt
 def message(request, chat_id):
@@ -53,6 +54,7 @@ def view_messages(request, chat_id):
 			message_dict ={'body':message.body,
 							'ip':message.ip,
 							'message_from':message.message_from,
+							'date_sent':message.date_sent.strftime("%I:%M %p"),
 							}
 			message_list.append(message_dict)
 		return HttpResponse(simplejson.dumps(message_list))

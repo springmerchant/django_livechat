@@ -6,18 +6,36 @@ from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from chat.forms import MessageForm
+from chat.forms import MessageForm,InformationForm
 from django.views.decorators.csrf import csrf_exempt
 from chat.models import Message,Chat
 from django.shortcuts import redirect
 from django.utils import simplejson
 import time
 
+
+
+
 @csrf_exempt
+def start_chat_from(request):
+	
+	form = InformationForm
+	
+	if request.method == "POST":
+		form = InformationForm(request.POST)
+		if form.is_valid():
+			
+			return render_to_response('login.html',{"form":form});
+		else:
+			raise
+
+	return render_to_response('chat/add_message.html',{"form":form})
+		
 def message(request, chat_id):
 	form = MessageForm
 	error = {}
 	chat = Chat.objects.get(id=chat_id)
+	
 	if request.method == "POST":
 		form = MessageForm(request.POST)
 	
@@ -26,9 +44,6 @@ def message(request, chat_id):
 			f = form.save(commit=False)
 			f.ip = "1.2.3.4"
 			f.chat = chat
-			
-			
-			
 			f.save()
 			
 			if request.is_ajax():
@@ -38,9 +53,6 @@ def message(request, chat_id):
 				return redirect('/messages/%s/'% (f.chat.id))
 
 	return render_to_response('chat/add_message.html',{"form":form,"chat":chat})	
-
-	
-	
 
 def view_messages(request, chat_id):
 	try:
@@ -58,6 +70,5 @@ def view_messages(request, chat_id):
 							}
 			message_list.append(message_dict)
 		return HttpResponse(simplejson.dumps(message_list))
-	
 	
 	return render_to_response('chat/see_chat.html',{"messages":messages})

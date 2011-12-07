@@ -10,7 +10,7 @@ CHAT_STATUS = (
     )
 class Chat(models.Model):
 	start_date = models.DateTimeField(auto_now_add=True)
-	title = models.CharField(max_length=128)
+	title = models.CharField(max_length=256)
 	operator = models.ForeignKey('Operator',null=True,blank=True)
 	end_date = models.DateTimeField(null=True,blank=True)
 	department = models.ForeignKey('Department',null=True,blank=True)

@@ -3,7 +3,16 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>  
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 <script type="text/javascript">
-
+$(document).ready(function () {
+    
+$("#id_body").keypress(function(e) {
+  if (e.keyCode == 13) {
+	 e.preventDefault()
+     LIVE_CHAT.post_message();
+	 $("#id_body").val("")
+   }
+});
+});
 var LIVE_CHAT = {
 'chat_id' : {{ chat.id }},
 'result_type' : "JSON",

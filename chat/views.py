@@ -8,32 +8,51 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from chat.forms import MessageForm,InformationForm
 from django.views.decorators.csrf import csrf_exempt
-from chat.models import Message,Chat
+from chat.models import Message,Chat,Visitor,Operator
 from django.shortcuts import redirect
 from django.utils import simplejson
+from django.contrib.auth.models import User
 import time
 
 
 
 
 @csrf_exempt
-def start_chat_from(request):
+def start_chat(request):
 	
-	form = InformationForm
+	form=InformationForm()
 	
-	if request.method == "POST":
-		form = InformationForm(request.POST)
-		if form.is_valid():
-			
-			return render_to_response('login.html',{"form":form});
-		else:
-			raise
+	if request.POST:
 
-	return render_to_response('chat/add_message.html',{"form":form})
+		chat = Chat()
+		form = InformationForm(request.POST)
 		
-def message(request, chat_id):
+		if form.is_valid():
+			try:
+				user = User.objects.get(id=1)
+			except User.DoesNotExist:
+				raise
+				
+			operator = Operator(first_name=form.cleaned_data['first_name'], user=user)
+			operator.save()
+			
+			visitor = Visitor(first_name=form.cleaned_data['first_name'])
+			visitor.save()
+						
+			chat = Chat(visitor=visitor, operator=operator, status='3')
+			chat.save()
+ 
+			return HttpResponseRedirect('/chat/view/%s/' % (chat.id))
+
+	#	return HttpResponseRedirect('/thanks/') # Redirect after POST
+	return render_to_response('chat/start_chat.html',{"form":form})
+
+@csrf_exempt		
+def add_message(request, chat_id):
 	form = MessageForm
 	error = {}
+	
+	
 	chat = Chat.objects.get(id=chat_id)
 	
 	if request.method == "POST":
@@ -51,6 +70,10 @@ def message(request, chat_id):
 				return HttpResponse(simplejson.dumps(error))
 			else:
 				return redirect('/messages/%s/'% (f.chat.id))
+
+def view_chat(request, chat_id):
+	form = MessageForm
+	chat = Chat.objects.get(id=chat_id)
 
 	return render_to_response('chat/add_message.html',{"form":form,"chat":chat})	
 

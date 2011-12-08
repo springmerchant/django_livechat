@@ -42,7 +42,8 @@ class Department(models.Model):
 
 class Visitor(models.Model):
 	user = models.ForeignKey(User,null=True,blank=True)
-	name = models.CharField(max_length=128)
+	first_name = models.CharField(max_length=128)
+	last_name = models.CharField(max_length=128)
 	ip = models.IPAddressField(null=True,blank=True)
 	email = models.EmailField(null=True,blank=True)
 	

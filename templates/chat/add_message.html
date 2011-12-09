@@ -7,7 +7,7 @@ $(document).ready(function () {
     
 $("#id_body").keypress(function(e) {
   if (e.keyCode == 13) {
-	// e.preventDefault()
+	 e.preventDefault()
      LIVE_CHAT.post_message();
 	 $("#id_body").val("")
    }

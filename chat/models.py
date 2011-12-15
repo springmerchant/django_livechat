@@ -48,7 +48,7 @@ class Visitor(models.Model):
 	email = models.EmailField(null=True,blank=True)
 	
 	def __unicode__(self):
-		return self.name
+		return self.first_name
 
 class Operator(models.Model):
 	user = models.ForeignKey(User)

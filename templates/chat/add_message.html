@@ -47,7 +47,7 @@ $(document).ready(function() {
 	LIVE_CHAT.post_message();
 	
 	});
-	{% if chat.status == "a" %}
+	{% if chat.status == 4 %}
 	LIVE_CHAT.get_messages();
 	{% endif %}
 });

@@ -1,0 +1,28 @@
+<html>       <center>
+<head>                                                                  
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>  
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+<script type="text/javascript">
+<!--JAVASCRIPT -->
+</script>
+<style type="text/css">
+<!--CSS -->
+</style>                                                           
+</head>                                                                 
+<body>     
+<form action="." method="post">{% csrf_token %}
+		<ul>
+			{{ form.as_ul }}
+			
+		</ul>
+	
+</form>
+	<!--<input accesskey="U" id="submit_button" type="button" value="Submit" name="submit"/>          -->                                                   
+
+</body>                                                                 
+</html>
+<!--JSON - Javascript Object Notation
+
+var obj = {'name':'Flavius','email':'flava@flavius.com'}-->
+
+

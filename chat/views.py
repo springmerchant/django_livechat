@@ -12,6 +12,7 @@ from chat.models import Message, Chat, Visitor, Operator, Department
 from django.shortcuts import redirect
 from django.utils import simplejson
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 import time
 
 @csrf_exempt
@@ -39,7 +40,7 @@ def start_chat(request):
                 raise
             visitor = Visitor(first_name=form.cleaned_data['first_name'])
             visitor.save()
-            chat = Chat(operator=operator,department=department, status='3')
+            chat = Chat(operator=operator,department=department, status='4')
             chat.save()
 	    return HttpResponseRedirect('/chat/view/%s/' % (chat.id))
 
@@ -80,7 +81,7 @@ def view_chat(request, chat_id):
 		raise
 	return render_to_response('chat/add_message.html', {"form": form, "chat": chat})
 
-
+@login_required
 def view_messages(request, chat_id):
 	try:
 		messages = Message.objects.filter(chat__id=chat_id).order_by('date_sent')
@@ -93,9 +94,28 @@ def view_messages(request, chat_id):
 			message_dict = {'body': message.body,
 							'ip': message.ip,
 							'message_from': message.message_from,
-							'date_sent': message.date_sent.strftime("%I:%M %p"),
-							}
+							'date_sent': message.date_sent.strftime("%I:%M %p")}
 			message_list.append(message_dict)
 		return HttpResponse(simplejson.dumps(message_list))
 
 	return render_to_response('chat/see_chat.html', {"messages": messages})
+
+
+@login_required
+def view_chat_list(request):
+    try:
+        chats = Chat.objects.filter(status='4')
+    except Chat.DoesNotExist:
+        raise
+
+    if request.is_ajax():
+        active_chats = []
+        for chat in chats:
+            chat_dict = { 'title' : chat.title,
+                             'id': chat.id }
+            active_chats.append(chat_dict)
+        return HttpResponse(simplejson.dumps(active_chats))
+
+    return render_to_response('chat/view_chat_list.html', {"chats": chats})
+
+#def take_chat()

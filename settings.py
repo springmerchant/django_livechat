@@ -114,9 +114,13 @@ INSTALLED_APPS = (
 	'django_livechat.chat',
     # Uncomment the next line to enable the admin:
 	'django.contrib.admin',
+    'registration',
     # Uncomment the next line to enable admin documentation:
      #'django.contrib.admindocs',
 )
+
+ACCOUNT_ACTIVATION_DAYS = 2
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

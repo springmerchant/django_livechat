@@ -94,8 +94,8 @@ def view_messages(request, chat_id):
 		for message in messages:
 			message_dict = {'body': message.body,
 							'ip': message.ip,
+							'message_from': message.get_from(),
 							'date_sent': message.date_sent.strftime("%I:%M %p")}
-			message.get_from()
 			message_list.append(message_dict)
 		return HttpResponse(simplejson.dumps(message_list))
 

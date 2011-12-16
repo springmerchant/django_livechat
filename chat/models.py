@@ -26,8 +26,14 @@ class Message(models.Model):
 	date_edited = models.DateTimeField(null=True,blank=True)
 	ip = models.IPAddressField()
 	chat = models.ForeignKey(Chat)
-	message_from = models.CharField(max_length=128)
-	
+	visitor = models.ForeignKey('Visitor',null=True,blank=True)
+
+	def get_from(self):
+		if self.visitor:
+			return self.visitor
+		else:
+			return self.chat.operator
+
 	def __unicode__(self):
 		return self.chat.title
 
@@ -57,3 +63,6 @@ class Operator(models.Model):
 	
 	def __unicode__(self):
 		return self.first_name
+
+
+

@@ -84,7 +84,6 @@ def view_chat(request, chat_id):
 		raise Http404
 	return render_to_response('chat/add_message.html', {"form": form, "chat": chat})
 
-@login_required
 def view_messages(request, chat_id):
 	try:
 		messages = Message.objects.filter(chat__id=chat_id).order_by('date_sent')

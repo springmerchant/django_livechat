@@ -4,34 +4,7 @@
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 <script type="text/javascript">
 <!--JAVASCRIPT -->
-var CHAT_LIST = {
-'result_type' : "JSON",
 
-	'get_chat' : function() {
-
-		var tr = '';
-		
-		$.get("http://127.0.0.1:8000/chat/view/list/", function(result)
-		{
-		if(result.length > 0) {
-			$.each(result, function(index, value) { 
-				tr = tr + "<tr><td>"+value.id+"</td><td>"+ value.title + "</td><td><a href='/chat/view/"+value.id+"/'>Take Chat </a></td></tr>";
-			});
-				table = "<table><thead><th>Chat_Id</th><th>Chat_title</th></thead>"+tr+"</table>";
-			
-			
-			$("#chat_view_list").html(table);}
-		else
-		{
-			$("#chat_view_list").html("<span>We are sorry but for the moment there are no active chats!</span>");
-		
-}
-			
-		}, this.result_type);
-	}};
-$(document).ready(function() {
-	CHAT_LIST.get_chat();
-});
 </script>
 <style type="text/css">
 <!--CSS -->
@@ -43,13 +16,22 @@ color:red;
 </style>                                                           
 </head>                                                                 
 <body>           
-<h1>Chats:</h1>
+<h1>Active chats:</h1>
 
+<table id="chat_view_list">
+<thead>
+    <th>Chat ID</th>
+    <th>Chat Title</th>
+</thead>
+
+</table>
 
 <div id="chat_view_list"></div>
 
 </body>                                                                 
 </html>
+<!--JSON - Javascript Object Notation
 
+var obj = {'name':'Flavius','email':'flava@flavius.com'}-->
 
 

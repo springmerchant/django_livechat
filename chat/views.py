@@ -13,6 +13,7 @@ from django.shortcuts import redirect
 from django.utils import simplejson
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 import time
 
 @csrf_exempt
@@ -28,16 +29,16 @@ def start_chat(request):
             try:
                 operator = Operator.objects.get(id=1)
             except Operator.DoesNotExist:
-                raise
+                raise Http404
 
             try:
                 user = User.objects.get(id=1)
             except User.DoesNotExist:
-                raise
+                raise Http404
             try:
                 department = Department.objects.get(id=1)
             except Department.DoesNotExist:
-                raise
+                raise Http404
             visitor = Visitor(first_name=form.cleaned_data['first_name'])
             visitor.save()
             chat = Chat(operator=operator,department=department, status='4')
@@ -55,7 +56,7 @@ def add_message(request, chat_id):
 	try:
 		chat = Chat.objects.get(id=chat_id)
 	except Chat.DoesNotExist:
-		raise
+		raise Http404
 
 	if request.method == "POST":
 		form = MessageForm(request.POST)
@@ -78,7 +79,7 @@ def view_chat(request, chat_id):
 	try:
 		chat = Chat.objects.get(id=chat_id)
 	except    Chat.DoesNotExist:
-		raise
+		raise Http404
 	return render_to_response('chat/add_message.html', {"form": form, "chat": chat})
 
 @login_required
@@ -86,7 +87,7 @@ def view_messages(request, chat_id):
 	try:
 		messages = Message.objects.filter(chat__id=chat_id).order_by('date_sent')
 	except Message.DoesNotExist:
-		raise
+		raise Http404
 
 	if request.is_ajax():
 		message_list = []
@@ -106,7 +107,7 @@ def view_chat_list(request):
     try:
         chats = Chat.objects.filter(status='4')
     except Chat.DoesNotExist:
-        raise
+        return HttpResponse(simpejson.dumps("{}"))
 
     if request.is_ajax():
         active_chats = []

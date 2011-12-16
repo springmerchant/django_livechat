@@ -65,6 +65,8 @@ def add_message(request, chat_id):
 			f = form.save(commit=False)
 			f.ip = "1.2.3.4"
 			f.chat = chat
+
+
 			f.save()
 
 			if request.is_ajax():
@@ -119,4 +121,21 @@ def view_chat_list(request):
 
     return render_to_response('chat/view_chat_list.html', {"chats": chats})
 
-#def take_chat()
+
+@login_required
+def take_chat(request):
+    form = MessageForm
+    try:
+        chat = Chat.objects.get(id=chat_id)
+    except    Chat.DoesNotExist:
+        raise Http404
+
+    try:
+        operator=Operator.objects.get(user=request.user)
+    except Operator.DoesNotExist:
+        raise Http404
+
+    chat.operator = operator
+    chat.save()
+
+    return render_to_response('chat/add_message.html', {"form": form, "chat": chat})

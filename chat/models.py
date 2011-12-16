@@ -30,9 +30,9 @@ class Message(models.Model):
 
 	def get_from(self):
 		if self.visitor:
-			return self.visitor
+			return "%s" % self.chat.visitor.first_name
 		else:
-			return self.chat.operator
+			return "%s" % self.chat.operator.first_name
 
 	def __unicode__(self):
 		return self.chat.title

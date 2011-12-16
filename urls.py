@@ -19,6 +19,7 @@ urlpatterns = patterns('',
 	url(r'^message/view/(?P<chat_id>\d{0,2})/$', 'chat.views.view_messages'),
 	url(r'^chat/start/$', 'chat.views.start_chat'),
 	url(r'^chat/view/(?P<chat_id>\d{0,2})/$', 'chat.views.view_chat'),
+    url(r'^chat/take/(?P<chat_id>\d{0,2})/$', 'chat.views.take_chat'),
     url(r'^chat/view/list/$', 'chat.views.view_chat_list'),
     #url(r'^chat/take/$', 'chat.views.chat_take')
 )

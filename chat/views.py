@@ -123,7 +123,7 @@ def view_chat_list(request):
 
 
 @login_required
-def take_chat(request):
+def take_chat(request,chat_id):
     form = MessageForm
     try:
         chat = Chat.objects.get(id=chat_id)

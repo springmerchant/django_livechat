@@ -24,7 +24,7 @@ var LIVE_CHAT = {
 		$.get("http://livechat.springmerchant.com/message/view/"+this.chat_id+"/", function(result)
 		{
 			$.each(result, function(index, value) { 
-				divs = divs + "<div>"+ value.date_sent + " -> " + value.body + "</div>";
+				divs = divs + "<div>" + value.message_from + "@" + value.date_sent + " -> " + value.body + "</div>";
 			});
 			
 			

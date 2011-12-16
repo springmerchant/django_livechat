@@ -42,6 +42,12 @@ var LIVE_CHAT = {
 		}, this.result_type)
 	}
 }
+setInterval("automatic_refresh();", 500);
+function automatic_refresh()
+{
+LIVE_CHAT.get_messages();
+}
+
 $(document).ready(function() {
 	$("#submit_button").click(function() {	
 	LIVE_CHAT.post_message();

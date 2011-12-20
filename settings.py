@@ -56,7 +56,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = 'D:/djangoprojects/django_livechat/static'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -85,6 +85,15 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '29&2y726vkx_*2zl_jrj6p9d)#=q*u#v=&v43%0xt=%r_5g2s)'
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
+)
+
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -101,8 +110,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'django_livechat.urls'
-
-
 
 INSTALLED_APPS = (
     'django.contrib.auth',

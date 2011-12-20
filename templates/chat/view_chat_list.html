@@ -11,7 +11,7 @@ var CHAT_LIST = {
 
 		var tr = '';
 		
-		$.get("http://livechat.springmerchant.com/chat/view/list/", function(result)
+		$.get("/chat/view/list/", function(result)
 		{
 		if(result.length > 0) {
 			$.each(result, function(index, value) { 

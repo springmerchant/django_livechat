@@ -23,4 +23,3 @@ urlpatterns = patterns('',
     url(r'^chat/view/list/$', 'chat.views.view_chat_list'),
     #url(r'^chat/take/$', 'chat.views.chat_take')
 )
-#(r'^accounts/', include('registration.backends.default.urls')),

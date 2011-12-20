@@ -21,7 +21,7 @@ var LIVE_CHAT = {
 
 		var divs = '';
 		
-		$.get("http://livechat.springmerchant.com/message/view/"+this.chat_id+"/", function(result)
+		$.get("/message/view/"+this.chat_id+"/", function(result)
 		{
 			$.each(result, function(index, value) { 
 				divs = divs + "<div>" + value.message_from + "@" + value.date_sent + " -> " + value.body + "</div>";
@@ -33,7 +33,7 @@ var LIVE_CHAT = {
 		}, this.result_type);
 	},
 	'post_message' : function() {
-		$.post("http://livechat.springmerchant.com/message/add/"+this.chat_id+"/",{ 'body' : $("#id_body").val(),'ip' : $("#id_ip").val(),'chat' : $("#id_chat").val()}, function(result){
+		$.post("/message/add/"+this.chat_id+"/",{ 'body' : $("#id_body").val(),'ip' : $("#id_ip").val(),'chat' : $("#id_chat").val()}, function(result){
 			if(result.error == "False" )
 			{
 				LIVE_CHAT.get_messages();
